@@ -1,0 +1,31 @@
+{
+    "name": "@ts-core/eth",
+    "version": "1.0.0",
+    "description": "Classes and utils for Eth",
+    "main": "index.js",
+    "scripts": {},
+    "author": {
+        "name": "Renat Gubaev",
+        "email": "renat.gubaev@gmail.com"
+    },
+    "license": "ISC",
+    "dependencies": {
+        "@ts-core/common": "^1.0.168",
+        "bignumber.js": "^9.0",
+        "web3": "1.2.6"
+    },
+    "devDependencies": {
+        "gulp-npm-publisher": "1.0.1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/ManhattanDoctor/ts-core-eth.git"
+    },
+    "keywords": [
+        "typescript"
+    ],
+    "bugs": {
+        "url": "https://github.com/ManhattanDoctor/ts-core-eth/issues"
+    },
+    "homepage": "https://github.com/ManhattanDoctor/ts-core-eth#readme"
+}
