@@ -1,6 +1,6 @@
 {
     "name": "@ts-core/eth",
-    "version": "1.0.2",
+    "version": "1.0.3",
     "description": "Classes and utils for Eth",
     "main": "index.js",
     "scripts": {},
