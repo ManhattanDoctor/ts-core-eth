@@ -111,6 +111,7 @@ export class EthApiClient extends LoggerWrapper {
     public async getTransaction(id: string): Promise<IEthTransaction> {
         return this.client.eth.getTransaction(id);
     }
+    
 
     // --------------------------------------------------------------------------
     //
