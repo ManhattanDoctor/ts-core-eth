@@ -1,6 +1,6 @@
 {
     "name": "@ts-core/eth",
-    "version": "1.0.3",
+    "version": "3.0.0",
     "description": "Classes and utils for Eth",
     "main": "index.js",
     "scripts": {},
@@ -10,12 +10,13 @@
     },
     "license": "ISC",
     "dependencies": {
-        "@ts-core/common": "^1.0.168",
-        "bignumber.js": "^9.0",
-        "web3": "1.2.6"
+        "@ts-core/common": "~3.0.14",
+        "bignumber.js": "^9.1.1",
+        "web3": "1.8.2"
     },
     "devDependencies": {
-        "gulp-npm-publisher": "1.0.1"
+        "@types/node": "^14.14.31",
+        "gulp-npm-module-publisher": "^3.0.0"
     },
     "repository": {
         "type": "git",

@@ -1,13 +1,11 @@
-import { PromiseHandler } from '@ts-core/common/promise';
-import { DateUtil } from '@ts-core/common/util';
-import Web3, * as GLOBAL_WEB3 from 'web3';
+import { ILogger, LoggerWrapper, DateUtil, PromiseHandler } from '@ts-core/common';
+// import Web3, * as GLOBAL_WEB3 from 'web3';
+import Web3 from 'web3';
 import { Contract } from 'web3-eth-contract';
 import { IEthBlock } from './IEthBlock';
 import { IEthTransaction } from './IEthTransaction';
 import { IEthTransactionReceipt } from './IEthTransactionReceipt';
 import * as _ from 'lodash';
-import { ILogger, LoggerWrapper } from '@ts-core/common/logger';
-
 
 export class EthApiClient extends LoggerWrapper {
     // --------------------------------------------------------------------------
@@ -26,13 +24,15 @@ export class EthApiClient extends LoggerWrapper {
 
     public static parseBlock(item: IEthBlock): void {
         if (!_.isNil(item)) {
-            item.createdDate = DateUtil.parseDate(Number(item.timestamp) * DateUtil.MILISECONDS_SECOND);
+            item.date = DateUtil.parseDate(Number(item.timestamp) * DateUtil.MILLISECONDS_SECOND);
         }
     }
 
+    /*
     private static get Web3(): any {
         return GLOBAL_WEB3 as any;
     }
+    */
 
     // --------------------------------------------------------------------------
     //
@@ -54,7 +54,8 @@ export class EthApiClient extends LoggerWrapper {
         super(logger);
 
         this._settings = settings;
-        this._client = new EthApiClient.Web3(new EthApiClient.Web3.providers.HttpProvider(this.settings.endpoint));
+        // this._client = new EthApiClient.Web3(new EthApiClient.Web3.providers.HttpProvider(this.settings.endpoint));
+        this._client = new Web3(new Web3.providers.HttpProvider(this.settings.endpoint));
         if (!_.isNil(this.settings.contractAbi) && !_.isNil(this.settings.contractAddress)) {
             this._contract = this.contractCreate(this.settings.contractAbi, this.settings.contractAddress);
         }
@@ -90,8 +91,8 @@ export class EthApiClient extends LoggerWrapper {
         return this.client.eth.getBlockNumber();
     }
 
-    public async getBlock(block: number | EthApiClientDefaultBlock, isNeedTransactions?: boolean): Promise<IEthBlock> {
-        let item = (await this.client.eth.getBlock(block, isNeedTransactions as any)) as IEthBlock;
+    public async getBlock(blockHashOrBlockNumber: number | EthApiClientDefaultBlock, isNeedTransactions?: boolean): Promise<IEthBlock> {
+        let item = await this.client.eth.getBlock(blockHashOrBlockNumber, isNeedTransactions as any) as any;
         EthApiClient.parseBlock(item);
         return item;
     }
@@ -111,7 +112,6 @@ export class EthApiClient extends LoggerWrapper {
     public async getTransaction(id: string): Promise<IEthTransaction> {
         return this.client.eth.getTransaction(id);
     }
-    
 
     // --------------------------------------------------------------------------
     //
