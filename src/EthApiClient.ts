@@ -1,6 +1,5 @@
 import { ILogger, LoggerWrapper, DateUtil, PromiseHandler } from '@ts-core/common';
-// import Web3, * as GLOBAL_WEB3 from 'web3';
-import Web3 from 'web3';
+import Web3, * as GLOBAL_WEB3 from 'web3';
 import { Contract } from 'web3-eth-contract';
 import { IEthBlock } from './IEthBlock';
 import { IEthTransaction } from './IEthTransaction';
@@ -28,11 +27,9 @@ export class EthApiClient extends LoggerWrapper {
         }
     }
 
-    /*
     private static get Web3(): any {
         return GLOBAL_WEB3 as any;
     }
-    */
 
     // --------------------------------------------------------------------------
     //
@@ -54,8 +51,7 @@ export class EthApiClient extends LoggerWrapper {
         super(logger);
 
         this._settings = settings;
-        // this._client = new EthApiClient.Web3(new EthApiClient.Web3.providers.HttpProvider(this.settings.endpoint));
-        this._client = new Web3(new Web3.providers.HttpProvider(this.settings.endpoint));
+        this._client = new EthApiClient.Web3(new EthApiClient.Web3.providers.HttpProvider(this.settings.endpoint));
         if (!_.isNil(this.settings.contractAbi) && !_.isNil(this.settings.contractAddress)) {
             this._contract = this.contractCreate(this.settings.contractAbi, this.settings.contractAddress);
         }
