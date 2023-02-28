@@ -2,7 +2,14 @@
     "name": "@ts-core/eth",
     "version": "3.0.1",
     "description": "Classes and utils for Eth",
-    "main": "index.js",
+    "main": "./cjs/public-api.js",
+    "module": "./esm/public-api.js",
+    "exports": {
+        ".": {
+            "import": "./esm/public-api.js",
+            "require": "./cjs/public-api.js"
+        }
+    },
     "scripts": {},
     "author": {
         "name": "Renat Gubaev",
