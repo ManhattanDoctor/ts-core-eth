@@ -6,7 +6,7 @@ import { IEthTransaction } from './IEthTransaction';
 import { IEthTransactionReceipt } from './IEthTransactionReceipt';
 import * as _ from 'lodash';
 
-export class EthApiClient extends LoggerWrapper {
+export class EthApiClient<T extends IEthApiClientSettings = IEthApiClientSettings> extends LoggerWrapper {
     // --------------------------------------------------------------------------
     //
     // 	Static Properties
@@ -39,7 +39,7 @@ export class EthApiClient extends LoggerWrapper {
 
     protected _client: Web3;
     protected _contract: Contract;
-    protected _settings: IEthApiClientSettings;
+    protected _settings: T;
 
     // --------------------------------------------------------------------------
     //
@@ -47,7 +47,7 @@ export class EthApiClient extends LoggerWrapper {
     //
     // --------------------------------------------------------------------------
 
-    constructor(settings: IEthApiClientSettings, logger?: ILogger) {
+    constructor(settings: T, logger?: ILogger) {
         super(logger);
 
         this._settings = settings;
@@ -123,7 +123,7 @@ export class EthApiClient extends LoggerWrapper {
         return this._contract;
     }
 
-    public get settings(): IEthApiClientSettings {
+    public get settings(): T {
         return this._settings;
     }
 }
